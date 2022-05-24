@@ -60,6 +60,17 @@ void main() {
       provider.sendEmailVerification();
       final user = provider.currentUser;
       expect(user, isNotNull);
+      expect(user!.isEmailVerified, true);
+    });
+
+    test('Should be able to log out and log in again', () async {
+      await provider.logOut();
+      await provider.logIn(
+        email: 'test@example.com',
+        password: 'test',
+      );
+      final user = provider.currentUser;
+      expect(user, isNotNull);
     });
   });
 }
